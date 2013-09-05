@@ -1,11 +1,12 @@
 (function($) {
 
 	var drawOurRepo = function(repos) {
-		var html = ['<ul>'];
+		var html = ['<dl class="dl-horizontal">'];
 		$.each(repos, function() {
-			html.push('<li><a href="' + this.html_url + '">' + this.name + '</a></li>');
+			html.push('<dt><a href="' + this.html_url + '">' + this.name + '</a></dt>');
+			html.push('<dd>' + this.description + '</dd>');
 		});
-		html.push('</ul>');
+		html.push('</dl>');
 		$('#our-repos').html(html.join(''));
 	};
 
@@ -16,6 +17,7 @@
 				repos.push({
 					name: this.name,
 					html_url: this.html_url,
+					description: this.description
 				});
 			});
 			drawOurRepo(repos);
