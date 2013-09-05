@@ -1,0 +1,20 @@
+{
+  "name": "regru.github.io",
+  "version": "0.0.0",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "components",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "backbone": "1.0.0",
+    "bootstrap": "git://github.com/twbs/bootstrap.git",
+    "jquery": "1.10.1",
+    "underscore": "1.4.3",
+    "requirejs": "~2.1.8",
+    "requirejs-plugins": "git://github.com/millermedeiros/requirejs-plugins.git#1.0.2"
+  }
+}
