@@ -23,20 +23,26 @@
 
 		if (repos === null) {
 			$('#surface').html('<div class="alert alert-info">Loading of repositories from GitHub&hellip;</div>');
-			$.get("https://api.github.com/orgs/regru/repos", { type: "public" })
-				.success(function(data) {
-					repos = [];
-					$.each(data, function() {
-						repos.push({
-							name: this.name,
-							html_url: this.html_url,
-							description: this.description
+			repos = [];
+			var responses_needed = 2;
+			for (var page = 1; page <= 2; page ++) {
+				$.get("https://api.github.com/orgs/regru/repos", { type: "public", page: page })
+					.success(function(data) {
+						$.each(data, function() {
+							repos.push({
+								name: this.name,
+								html_url: this.html_url,
+								description: this.description
+							});
 						});
+						responses_needed--;
+						if (responses_needed === 0) {
+							drawOurRepo(repos);
+						}
+					}).fail(function() {
+						$('#surface').html('<div class="alert alert-danger">Loading of repositories from GitHub was failed.</div>');
 					});
-					drawOurRepo(repos);
-				}).fail(function() {
-				$('#surface').html('<div class="alert alert-danger">Loading of repositories from GitHub was failed.</div>');
-				});
+			}
 		} else {
 			drawOurRepo(repos);
 		}
